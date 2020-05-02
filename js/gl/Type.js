@@ -1,8 +1,6 @@
 import * as THREE from 'three';
 import Gl from './index';
 
-import shaders from './shaders';
-
 // THREE BMFONT TEXT
 import loadFont from 'load-bmfont';
 import createGeometry from 'three-bmfont-text';
@@ -11,30 +9,38 @@ import fontFile from '../../assets/Orbitron-Black.fnt';
 import fontAtlas from '../../assets/Orbitron-Black.png';
 
 export default class extends THREE.Object3D {
-  init(opts) {
-    this.word = opts.word;
-    this.wordColor = opts.color;
-    this.fillColor = opts.fill;
-    this.wordPosition = opts.position;
-    this.wordScale = opts.scale;
+  init(options) {
+    this.opts = {
+      word: options.word,
+      color: options.color,
+      background: options.background,
+      wordPosition: options.position.texture,
+      wordScale: options.scale,
+      rotation: options.rotation || [0, 0, 0],
+      geometry: options.geometry,
+      vertex: options.shaders.vertex,
+      fragment: options.shaders.fragment,
+      fontFile: options.font.file || fontFile,
+      fontAtlas: options.font.atlas || fontAtlas
+    };
 
     // Create geometry of packed glyphs
-    loadFont(fontFile, (err, font) => {
+    loadFont(this.opts.fontFile, (err, font) => {
       this.fontGeometry = createGeometry({
         font,
-        text: this.word,
+        text: this.opts.word,
       })
 
       // Load texture containing font glyps
       this.loader = new THREE.TextureLoader();
-      this.loader.load(fontAtlas, (texture) => {
+      this.loader.load(this.opts.fontAtlas, (texture) => {
         this.fontMaterial = new THREE.RawShaderMaterial(
           MSDFShader({
             map: texture,
             side: THREE.DoubleSide,
             transparent: true,
             negate: false,
-            color: this.wordColor
+            color: this.opts.color
           })
         );
 
@@ -51,21 +57,21 @@ export default class extends THREE.Object3D {
     this.rtCamera.position.z = 2.4;
     
     this.rtScene = new THREE.Scene();
-    this.rtScene.background = new THREE.Color(this.fillColor);
+    this.rtScene.background = new THREE.Color(this.opts.background);
 
     this.text = new THREE.Mesh(this.fontGeometry, this.fontMaterial);
-    this.text.position.set(...this.wordPosition); 
+    this.text.position.set(...this.opts.wordPosition); 
     this.text.rotation.set(Math.PI, 0, 0);  
-    this.text.scale.set(...this.wordScale);
+    this.text.scale.set(...this.opts.wordScale);
     this.rtScene.add(this.text);    
   }
 
   createMesh() {
-    this.geometry = new THREE.TorusKnotGeometry(9, 3, 768, 3, 4, 3);
+    this.geometry = this.opts.geometry;
 
     this.material = new THREE.ShaderMaterial({
-      vertexShader: shaders.vertex.demo1,
-      fragmentShader: shaders.fragment.demo1,
+      vertexShader: this.opts.vertex,
+      fragmentShader: this.opts.fragment,
       uniforms: {
         uTime: { value: 0 },
         uTexture: { value: this.rt.texture },
@@ -78,7 +84,7 @@ export default class extends THREE.Object3D {
     });
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.rotation.set(0, 0, Math.PI * -0.25);
+    this.mesh.rotation.set(...this.opts.rotation);
 
     this.mesh.onBeforeRender = (renderer) => {
       renderer.setRenderTarget(this.rt);
