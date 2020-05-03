@@ -46,8 +46,8 @@ export default class extends THREE.Object3D {
 
         this.createRenderTarget();
         this.createMesh();
-      });  
-    });    
+      });
+    });
   }
 
   createRenderTarget() {
@@ -55,20 +55,19 @@ export default class extends THREE.Object3D {
     this.rt = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
     this.rtCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
     this.rtCamera.position.z = 2.4;
-    
+
     this.rtScene = new THREE.Scene();
     this.rtScene.background = new THREE.Color(this.opts.background);
 
     this.text = new THREE.Mesh(this.fontGeometry, this.fontMaterial);
-    this.text.position.set(...this.opts.wordPosition); 
-    this.text.rotation.set(Math.PI, 0, 0);  
+    this.text.position.set(...this.opts.wordPosition);
+    this.text.rotation.set(Math.PI, 0, 0);
     this.text.scale.set(...this.opts.wordScale);
-    this.rtScene.add(this.text);    
+    this.rtScene.add(this.text);
   }
 
   createMesh() {
     this.geometry = this.opts.geometry;
-    console.log(this.geometry);
 
     this.material = new THREE.ShaderMaterial({
       vertexShader: this.opts.vertex,
@@ -90,15 +89,15 @@ export default class extends THREE.Object3D {
     this.mesh.onBeforeRender = (renderer) => {
       renderer.setRenderTarget(this.rt);
       renderer.render(this.rtScene, this.rtCamera);
-      renderer.setRenderTarget(null);    
-    }    
+      renderer.setRenderTarget(null);
+    }
 
     this.add(this.mesh);
 
-    Gl.scene.add(this);  
-  }  
+    Gl.scene.add(this);
+  }
 
   updateTime(time) {
     this.material.uniforms.uTime.value = time;
-  }    
+  }
 }

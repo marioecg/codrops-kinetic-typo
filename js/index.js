@@ -5,4 +5,4 @@ import Type from './gl/Type';
 import options from './options';
 
 const type = new Type();
-type.init(options[2]);
+type.init(options[3]);

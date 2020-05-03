@@ -97,7 +97,7 @@ const boxVertex = /* glsl */ `
 
   vec3 rotate(vec3 v, vec3 axis, float angle) {
     return (rotation3d(axis, angle) * vec4(v, 1.0)).xyz;
-  }  
+  }
 
   void main() {
     vUv = uv;
@@ -109,11 +109,11 @@ const boxVertex = /* glsl */ `
     float twist = 0.2;
     float angle = pos.x * twist;
 
-    vec3 transformed = rotate(pos, axis, angle);    
+    vec3 transformed = rotate(pos, axis, angle);
 
     // float freq = 0.75;
     // float amp = 1.;
-    // transformed.y += cos(transformed.x * freq + 0.) * amp;    
+    // transformed.y += cos(transformed.x * freq + 0.) * amp;
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.);
   }
@@ -134,18 +134,69 @@ const boxFragment = /* glsl */ `
   }
 `;
 
+//----------------- PLANE SHADERS -----------------//
+
+const planeVertex = /* glsl */ `
+  varying vec2 vUv;
+  varying float vWave;
+
+  uniform float uTime;
+
+  void main() {
+    vUv = uv;
+
+    vec3 pos = position;
+    float time = uTime * 1.;
+    float freq = 0.4;
+    float amp = 4.;
+    float wave = sin((pos.x - pos.y) * freq - time) * amp;
+    pos.z += wave;
+
+    vWave = wave;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+  }
+`;
+
+const planeFragment = /* glsl */ `
+  varying vec2 vUv;
+  varying float vWave;
+
+  uniform float uTime;
+  uniform sampler2D uTexture;
+
+  float map(float value, float min1, float max1, float min2, float max2) {
+    return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+  }
+
+  void main() {
+    float time = uTime * 0.25;
+    vec2 repeat = vec2(4., 16.);
+    vec2 uv = fract(vUv * repeat);
+    vec3 texture = texture2D(uTexture, uv).rgb;
+    texture *= vec3(uv.x, uv.y, 0.);
+
+    float wave = clamp(vWave, 0., 1.);
+    float shadow = map(wave, 0., 1., 0.5, 1.);
+
+    gl_FragColor = vec4(vec3(texture * wave), 1.);
+  }
+`;
+
 //-------------- EXPORT SHADERS -----------------//
 
 export default {
   vertex: {
     demo1: torusVertex,
     demo2: sphereVertex,
-    demo3: boxVertex
+    demo3: boxVertex,
+    demo4: planeVertex,
   },
 
   fragment: {
     demo1: torusFragment,
     demo2: sphereFragment,
-    demo3: boxFragment
+    demo3: boxFragment,
+    demo4: planeFragment,
   },
 };

@@ -19,7 +19,7 @@ const options = [
     font: {
       file: f.file.demo1,
       atlas: f.atlas.demo1
-    }    
+    }
   },
 
   {
@@ -39,9 +39,9 @@ const options = [
     font: {
       file: f.file.demo2,
       atlas: f.atlas.demo2
-    }  
+    }
   },
-  
+
   {
     word: 'TWISTED',
     color: '#000000',
@@ -59,8 +59,28 @@ const options = [
     font: {
       file: f.file.demo3,
       atlas: f.atlas.demo3
-    }  
-  }  
+    }
+  },
+
+  {
+    word: 'RELAX',
+    color: '#000000',
+    background: '#ffffff',
+    geometry: new THREE.PlaneGeometry(30, 30, 64, 64),
+    position: {
+      texture: [-0.9, -0.65, 0],
+      mesh: [0, 0, 0]
+    },
+    scale: [0.014, 0.05, 1],
+    shaders: {
+      vertex: shaders.vertex.demo4,
+      fragment: shaders.fragment.demo4
+    },
+    font: {
+      file: f.file.demo4,
+      atlas: f.atlas.demo4
+    }
+  }
 ];
 
 export default options;
