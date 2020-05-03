@@ -68,6 +68,7 @@ export default class extends THREE.Object3D {
 
   createMesh() {
     this.geometry = this.opts.geometry;
+    console.log(this.geometry);
 
     this.material = new THREE.ShaderMaterial({
       vertexShader: this.opts.vertex,

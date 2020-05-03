@@ -17,7 +17,7 @@ export default new class {
       100
     );
 
-    this.camera.position.z = 50;
+    this.camera.position.z = 60;
 
     this.scene = new THREE.Scene();
 
