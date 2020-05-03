@@ -22,6 +22,25 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: 1.5s cubic-bezier(1, 0, 0, 1);
+}
+
+body.demo-2 {
+  --color-bg: #3e64ff;
+  /* --color-text: #111;
+  --color-link-hover: #000; */
+}
+
+body.demo-3 {
+  --color-bg: #d8345f;
+  /* --color-text: #111;
+  --color-link-hover: #000; */
+}
+
+body.demo-4 {
+  --color-bg: #ffd868;
+  --color-text: #111;
+  --color-link-hover: #000;
 }
 
 /* Page Loader */

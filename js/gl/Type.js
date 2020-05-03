@@ -13,9 +13,10 @@ export default class extends THREE.Object3D {
     this.opts = {
       word: options.word,
       color: options.color,
-      background: options.background,
+      fill: options.fill,
       wordPosition: options.position.texture,
       wordScale: options.scale,
+      position: options.position.mesh,
       rotation: options.rotation || [0, 0, 0],
       geometry: options.geometry,
       vertex: options.shaders.vertex,
@@ -57,7 +58,7 @@ export default class extends THREE.Object3D {
     this.rtCamera.position.z = 2.4;
 
     this.rtScene = new THREE.Scene();
-    this.rtScene.background = new THREE.Color(this.opts.background);
+    this.rtScene.background = new THREE.Color(this.opts.fill);
 
     this.text = new THREE.Mesh(this.fontGeometry, this.fontMaterial);
     this.text.position.set(...this.opts.wordPosition);
@@ -84,7 +85,9 @@ export default class extends THREE.Object3D {
     });
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.position.set(...this.opts.position);
     this.mesh.rotation.set(...this.opts.rotation);
+    this.mesh.lookAt(new THREE.Vector3());
 
     this.mesh.onBeforeRender = (renderer) => {
       renderer.setRenderTarget(this.rt);

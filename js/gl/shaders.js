@@ -68,9 +68,10 @@ const sphereFragment = /* glsl */ `
     vec3 texture = texture2D(uTexture, uv).rgb;
     // texture *= vec3(uv.x, uv.y, 0.);
 
-    float depth = vPosition.z * 0.075;
+    float depth = vPosition.z / 10.;
+    vec3 fragColor = mix(vec3(0., 0., .8), texture, depth);
 
-    gl_FragColor = vec4(texture * depth, 1.);
+    gl_FragColor = vec4(fragColor, 1.);
   }
 `;
 
@@ -146,13 +147,12 @@ const planeVertex = /* glsl */ `
     vUv = uv;
 
     vec3 pos = position;
-    float time = uTime * 1.;
-    float freq = 0.4;
-    float amp = 4.;
-    float wave = sin((pos.x - pos.y) * freq - time) * amp;
-    pos.z += wave;
+    float freq = 0.5;
+    float amp = 1.;
+    float time = uTime * 3.5;
+    pos.z += sin((pos.x - pos.y) * freq - time) * amp;
 
-    vWave = wave;
+    vWave = pos.z;
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
   }
@@ -174,12 +174,15 @@ const planeFragment = /* glsl */ `
     vec2 repeat = vec2(4., 16.);
     vec2 uv = fract(vUv * repeat);
     vec3 texture = texture2D(uTexture, uv).rgb;
-    texture *= vec3(uv.x, uv.y, 0.);
+    // texture *= vec3(uv.x, uv.y, 0.);
 
-    float wave = clamp(vWave, 0., 1.);
-    float shadow = map(wave, 0., 1., 0.5, 1.);
+    float wave = vWave;
+    wave = map(wave, -1., 1., 0., 0.25);
+    float shadow = 1. - wave;
 
-    gl_FragColor = vec4(vec3(texture * wave), 1.);
+    vec3 fragColor = texture * shadow;
+
+    gl_FragColor = vec4(fragColor, 1.);
   }
 `;
 

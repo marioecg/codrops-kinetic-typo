@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default new class {
   constructor() {
@@ -8,20 +8,20 @@ export default new class {
     });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x000000, 1);
+    this.renderer.setClearColor(0x000000, 0);
 
     this.camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
-      0.1,
-      100
+      1,
+      1000
     );
 
-    this.camera.position.z = 60;
+    this.camera.position.z = 1;
 
     this.scene = new THREE.Scene();
 
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);    
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);    
 
     this.clock = new THREE.Clock();
 
@@ -29,7 +29,7 @@ export default new class {
   }
 
   render() {
-    this.controls.update();
+    // this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
 
