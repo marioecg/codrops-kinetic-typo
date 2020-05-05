@@ -6,51 +6,67 @@ import Gl from './gl';
 import Type from './gl/Type';
 import options from './options';
 
-// Create type gl elements
-for (let i = 0; i < options.length; i++) {
-  let len = options.length - 1;
+class App {
+  constructor() {
+    this.elems = [...document.querySelectorAll('.frame__demo')]
+    this.prev = 0;
+    this.current = 0;
+    this.turn = 0;    
 
-  // Position elements in a circle
-  let angle = (i / options.length) * (Math.PI * 2);
-  let radius = 50;
-  let x = radius * Math.cos(angle);
-  let z = radius * Math.sin(angle);  
-  options[len - i].position.mesh = [x, 0, z];
+    this.init();
+  }
 
-  // Create kinetic type
-  let type = new Type();
-  type.init(options[len - i]);
-}
+  init() {
+    this.createGl();
+    this.changeDemo();
+  }
 
-// Change demo on click
-let prev = 0;
-let current = 0;
-let turn;
+  createGl() {
+    for (let i = 0; i < options.length; i++) {
+      let len = options.length - 1;
 
-const links = [...document.querySelectorAll('.frame__demo')];
-links.forEach((link, index) => link.addEventListener('click', click.bind(null, index)));
+      // Position elements in a circle
+      let angle = (i / options.length) * (Math.PI * 2);
+      let radius = 50;
+      let x = radius * Math.cos(angle);
+      let z = radius * Math.sin(angle);  
+      options[len - i].position.mesh = [x, 0, z];
 
-function click(index, { currentTarget }) {
-  links.forEach(link => link.classList.remove('frame__demo--current'));
-  currentTarget.classList.add('frame__demo--current');
+      // Create kinetic type
+      let type = new Type();
+      type.init(options[len - i]);
+    }    
+  }
 
-  prev = current;
-  current = links.indexOf(currentTarget);
-
-  if (prev === current) return;
-
-  turn = -(Math.PI / 2) * (current - prev);
-
-  const tl = gsap.timeline({
-    onStart: () => {
-      document.body.classList = "";
-      document.body.classList.add(options[index].class);
-    }
-  });
-  tl
-    .to(Gl.scene.rotation, {
-      duration: 1.5,
-      ease: "expo.inOut",
-      y: `+=${turn}`,
+  changeDemo() {
+    this.elems.forEach((el, index) => el.addEventListener('click', this.onClick.bind(this, index)));    
+  }
+  
+  onClick(index, { currentTarget }) {
+    this.elems.forEach(el => el.classList.remove('frame__demo--current'));
+    currentTarget.classList.add('frame__demo--current');
+  
+    this.prev = this.current;
+    this.current = this.elems.indexOf(currentTarget);
+  
+    if (this.prev === this.current) return;
+  
+    this.turn = - (Math.PI / 2) * (this.current - this.prev);
+  
+    this.tl = gsap.timeline({
+      onStart: () => {
+        document.body.classList = "";
+        document.body.classList.add(options[index].class);
+      }
     });
+  
+    this.tl
+      .to(Gl.scene.rotation, {
+        duration: 1.5,
+        ease: "expo.inOut",
+        y: `+=${this.turn}`,
+      });
+  }
 }
+
+new App();
