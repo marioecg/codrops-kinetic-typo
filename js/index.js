@@ -23,18 +23,16 @@ class App {
 
   createGl() {
     for (let i = 0; i < options.length; i++) {
-      let len = options.length - 1;
-
       // Position elements in a circle
-      let angle = (i / options.length) * (Math.PI * 2);
+      let angle = (i / options.length) * (Math.PI * 2) + Math.PI * 1.5; // Offset the turn
       let radius = 50;
       let x = radius * Math.cos(angle);
       let z = radius * Math.sin(angle);  
-      options[len - i].position.mesh = [x, 0, z];
+      options[i].position.mesh = [x, 0, z];
 
       // Create kinetic type
       let type = new Type();
-      type.init(options[len - i]);
+      type.init(options[i]);
     }    
   }
 
@@ -51,7 +49,7 @@ class App {
   
     if (this.prev === this.current) return;
   
-    this.turn = - (Math.PI / 2) * (this.current - this.prev);
+    this.turn = (Math.PI / 2) * (this.current - this.prev);
   
     this.tl = gsap.timeline({
       onStart: () => {
