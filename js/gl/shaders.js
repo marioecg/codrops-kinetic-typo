@@ -103,11 +103,10 @@ const boxVertex = /* glsl */ `
   void main() {
     vUv = uv;
 
-    float time = uTime * .5;
     vec3 pos = position;
 
     vec3 axis = vec3(1., 0., 0.);
-    float twist = 0.2;
+    float twist = 0.1;
     float angle = pos.x * twist;
 
     vec3 transformed = rotate(pos, axis, angle);

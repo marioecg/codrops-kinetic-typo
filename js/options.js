@@ -48,7 +48,7 @@ const options = [
     word: 'TWISTED',
     color: '#ffffff',
     fill: '#d8345f',
-    geometry: new THREE.BoxGeometry(30, 10, 10, 64, 64, 64),
+    geometry: new THREE.BoxGeometry(100, 10, 10, 64, 64, 64),
     position: {
       texture: [-0.945, -0.5, 0],
       mesh: [0, 0, 0]
