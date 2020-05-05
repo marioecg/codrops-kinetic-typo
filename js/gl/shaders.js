@@ -176,7 +176,7 @@ const planeFragment = /* glsl */ `
     // texture *= vec3(uv.x, uv.y, 0.);
 
     float wave = vWave;
-    wave = map(wave, -1., 1., 0., 0.25);
+    wave = map(wave, -1., 1., 0., 0.1);
     float shadow = 1. - wave;
 
     vec3 fragColor = texture * shadow;
