@@ -1,14 +1,6 @@
-*How to use this template:*
+# Kinetic typography with Three.js
 
-- The general styles for the demo page are in css/base.css
-- The README.md can be used to add credits of resources used
-- For writing the tutorial, take a look at https://github.com/crnacura/CodropsTemplate/wiki/Writing-the-article
-- Delete this 'how to' in the final version and leave the following (fill in title/description, credits and social links, we'll do the rest):
-
-
-# The Title
-
-*Description*, *author*
+*Discover how to use Three.js to render kinetic typography.*
 
 ![Image Title](link)
 
@@ -39,11 +31,14 @@ npm run build
 
 ## Credits
 
-*third party resources*
+- [Three.js](https://threejs.org/docs/)
+- [The Book of Shaders](https://www.npmjs.com/package/glsl-noise)
+- [three-bmfont-text](https://github.com/Jam3/three-bmfont-text)
+- [All Your Html](https://www.youtube.com/watch?v=jtXnN6-ezms&t=29m47s)
 
 ## Misc
 
-Follow *Author*: [Twitter](), [Dribbble](), [Google+](), [GitHub]() 
+Follow *@marioecg*: [Twitter](https://twitter.com/marioecg), [Instagram](https://www.instagram.com/marioecg/)
 
 Follow Codrops: [Twitter](http://www.twitter.com/codrops), [Facebook](http://www.facebook.com/codrops), [GitHub](https://github.com/codrops), [Instagram](https://www.instagram.com/codropsss/)
 
