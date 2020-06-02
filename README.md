@@ -1,12 +1,12 @@
-# Kinetic typography with Three.js
+# Kinetic Typography with Three.js
 
-*Discover how to use Three.js to render kinetic typography.*
+Discover how to use Three.js to render kinetic typography.
 
-![Image Title](link)
+![Kinetic Typography](https://tympanus.net/codrops/wp-content/uploads/2020/05/thumbnail.jpg)
 
-[Article on Codrops](https://tympanus.net/codrops/?p=)
+[Article on Codrops](https://tympanus.net/codrops/?p=49770)
 
-[Demo](http://tympanus.net/Development/.../)
+[Demo](http://tympanus.net/Tutorials/codrops-kinetic-typo/)
 
 
 ## Installation
@@ -26,7 +26,13 @@ npm start
 Create the build:
 
 ```
-npm run build
+npm run dev
+```
+
+or
+
+```
+npm run prod
 ```
 
 ## Credits
