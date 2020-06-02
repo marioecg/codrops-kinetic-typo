@@ -2,7 +2,7 @@
 
 *Discover how to use Three.js to render kinetic typography.*
 
-![Image Title](link)
+![Image Title](https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2020/05/thumbnail.jpg)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=)
 
