@@ -67,8 +67,8 @@ const options = [
 
   {
     word: 'RELAX',
-    color: '#ffffff',
-    fill: '#ffd868',
+    color: '#fff',
+    fill: '#e3e6e5',
     geometry: new THREE.PlaneGeometry(27, 27, 64, 64),
     position: {
       texture: [-0.9, -0.65, 0],
