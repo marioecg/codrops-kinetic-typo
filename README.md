@@ -6,7 +6,7 @@
 
 [Article on Codrops](https://tympanus.net/codrops/?p=)
 
-[Demo](http://tympanus.net/Development/.../)
+[Demo](https://tympanus.net/codrops/2020/06/02/kinetic-typography-with-three-js/)
 
 
 ## Installation
