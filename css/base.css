@@ -13,7 +13,7 @@ body {
 	--color-text: #fff;
 	--color-bg: #000;
 	--color-link: #aaa;
-	--color-link-hover: #fff;
+	--color-link-hover: #aaa;
 	color: var(--color-text);
 	background-color: var(--color-bg);
 	font-family: arpona, serif;
