@@ -25,13 +25,14 @@ body {
 body.demo-2 {
 	--color-bg: #3e64ff;
 	--color-link: #13246d;
+	--color-link-hover: #13246d;
 }
 
 body.demo-3 {
 	--color-bg: #d8345f;
 	--color-text: #fff;
 	--color-link: #000;
-	--color-link-hover: #fff;
+	--color-link-hover: #000;
 }
 
 body.demo-4 {
@@ -89,6 +90,7 @@ a:hover,
 a:focus {
 	color: var(--color-link-hover);
 	outline: none;
+	transition: none;
 }
 
 .frame {
