@@ -32,7 +32,7 @@ npm run build
 ## Credits
 
 - [Three.js](https://threejs.org/docs/)
-- [The Book of Shaders](https://www.npmjs.com/package/glsl-noise)
+- [The Book of Shaders](https://thebookofshaders.com/)
 - [three-bmfont-text](https://github.com/Jam3/three-bmfont-text)
 - [All Your Html](https://www.youtube.com/watch?v=jtXnN6-ezms&t=29m47s)
 
