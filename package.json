@@ -35,7 +35,7 @@
     "file-loader": "^6.0.0",
     "glslify": "^7.0.0",
     "glslify-loader": "^2.0.0",
-    "gsap": "^3.2.6",
+    "gsap": "^3.6.0",
     "load-bmfont": "^1.4.0",
     "raw-loader": "^4.0.1",
     "three": "^0.115.0",
